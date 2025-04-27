@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Canvas Portfolio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Noto+Sans+KR:wght@100..900&display=swap');
+    body { margin: 0; font-family: 'Noto Sans KR','Bree Serif'; }
+
+    header, nav { background: #3399ff; border: none; }
+    header {
+      padding: 5px 20px;
+      position: fixed; top: 0; left: 0;
+      width: 100%; z-index: 999;
+      display: flex; align-items: center; justify-content: center;
+    }
+    header h1 { color: #3399FF; margin: 0; font-size: 24px; }
+
+    nav {
+      padding: 0 20px;
+      position: fixed; top: 36px; left: 0;
+      width: 100%; z-index: 998;
+      display: flex; gap: 15px;
+    }
+    nav a {
+      color: white; text-decoration: none;
+      font-size: 18px; line-height: 40px;
+      cursor: pointer; font-family: 'Bree Serif','Noto Sans KR';
+    }
+    nav a.active-link {
+      border-bottom: 2px solid #FFEA00;
+      color: #FFEA00;
+    }
+
+    /* ↓ 변경된 부분 시작 ↓ */
+    /* 모든 섹션 기본 숨김 */
+    section {
+      display: none;
+      padding-top: 76px;
+    }
+    /* 홈 섹션은 active일 때만 flex 레이아웃으로 보임 */
+    #home.active {
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 76px);
+      margin: 0;
+    }
+    /* 홈이 아닌 다른 섹션들은 active일 때 block으로 보임 */
+    section.active:not(#home) {
+      display: block;
+    }
+    /* ↑ 변경된 부분 끝 ↑ */
+
+    /* Home 내부 스타일 */
+    .home-top {
+      flex: 1; display: flex;
+      background: #3399ff;
+      align-items: center; justify-content: center;
+      padding: 40px;
+    }
+    .home-top img {
+      width: 500px; height: 300px;
+      object-fit: cover; margin-right: 30px;
+      border-radius: 12px;
+    }
+    .home-top-text {
+      font-size: 60px; font-weight: bold;
+      color: rgb(235, 229, 40);
+    }
+    .home-bottom {
+      flex: 1; background: #fdfdf1;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .home-bottom h2 {
+      font-size: 100px; color: #3399ff;
+      margin: 0;
+    }
+
+    /* Profile */
+    #profile .profile-image {
+      flex: 0 0 200px; width: 200px; height: 200px;
+      border-radius: 50%; overflow: hidden; margin-right: 40px; 
+    }
+    #profile .profile-image img {
+      width: 100%; height: 100%; object-fit: cover; 
+    }
+    #profile .profile-text {
+      flex: 1; max-width: 800px;
+      font-size: 16px; line-height: 1.8; padding: 100px 40px 40px;
+    }
+
+    /* Portfolio */
+    #portfolio .portfolio-items { padding: 20px; }
+    #portfolio .portfolio-row {
+      display: flex; justify-content: center;
+      gap: 20px; flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    #portfolio .portfolio-item {
+      width: 300px;
+    }
+    #portfolio .portfolio-item img,
+    #portfolio .portfolio-item video {
+      width: 100%; border-radius: 8px;
+    }
+    #portfolio .portfolio-item p {
+      text-align: center; margin: 10px 0;
+    }
+    #portfolio .portfolio-footer {
+      text-align: center; padding: 20px;
+      font-size: 14px; color: #888;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>1</h1>
+  </header>
+  <nav>
+    <a onclick="showSection('home')">Home</a>
+    <a onclick="showSection('profile')">Profile</a>
+    <a onclick="showSection('portfolio')">Portfolio</a>
+  </nav>
+
+  <!-- Home -->
+  <section id="home" class="active">
+    <div class="home-top">
+      <img src="image0.jpg" alt="홈 이미지">
+      <div class="home-top-text">Meaning &amp; Fun</div>
+    </div>
+    <div class="home-bottom">
+      <!-- DORIMGO 타자기 효과 대상 -->
+      <h2 class="typewriter"></h2>
+    </div>
+  </section>
+
+  <!-- Profile -->
+  <section id="profile">
+    <div class="profile-image">
+      <img src="image2.png" alt="프로필 이미지">
+    </div>
+    <div class="profile-text">
+      <h1>고도림</h1>
+      <h2>살아오며 인상 깊었던 문장 or 이번 생에 풀고 싶은 질문</h2>
+      “인생이 나에게 레몬을 주거든, 그것으로 레몬 에이드를 만들어라.”<br><br>
+      <h2>내가 사랑하는 것들</h2>
+      우리 가족, 웹툰 <em>유미의 세포들</em>, 표고버섯, 맛조개 잡기, 튀르키예, 오키나와<br><br>
+      <h2>10년 후에 나는</h2>
+      29살 나는 어떤 모습일까? 여전히 내가 사랑하는 것을 소중히 여기고, 조금 더 자유롭고 단단해진 내가 되어 있기를.<br><br>
+      <h2>지금까지 나는</h2><br>
+      <strong>봉사 활동</strong><br>
+      [2022.07] ~ [2022.08] 지역 아동센터 여름방학 코딩 캠프 운영<br>
+      [2023.04] ~ [2023.06] 초등학생 대상 미술 심리 활동 보조<br><br>
+      <strong>수상 경력</strong><br>
+      [2023.11] 지역 창의소프트웨어 공모전 우수상<br>
+      [2022.10] 학습 멘토링 우수활동자 표창<br><br>
+      <strong>관심 분야 활동</strong><br>
+      [2021.03] ~ [2022.12] 중·고등학생 대상 파이썬 기초강의 진행<br>
+      [2023.01] ~ [2023.05] 환경 교육 프로젝트 ‘지구지킴이’ 참여
+    </div>
+  </section>
+
+  <!-- Portfolio -->
+  <section id="portfolio">
+    <div class="portfolio-items">
+      <div class="portfolio-row">
+        <div class="portfolio-item">
+          <img src="image3.png" alt="작품1">
+          <p>피카소 스타일 고양이</p>
+        </div>
+        <div class="portfolio-item">
+          <img src="image4.png" alt="작품2">
+          <p>샤갈 스타일의 하얀 날아다니는 고양이</p>
+        </div>
+        <div class="portfolio-item">
+          <img src="image5.png" alt="작품3">
+          <p>레오나르도 다 빈치 스타일의 날아다니는 고양이</p>
+        </div>
+        <div class="portfolio-item">
+          <img src="image6.png" alt="작품4">
+          <p>모네 스타일 고양이</p>
+        </div>
+      </div>
+      <div class="portfolio-row">
+        <div class="portfolio-item">
+          <video controls poster="poster1.png">
+            <source src="video1.mp4" type="video/mp4">
+          </video>
+          <p>수노 음악생성</p>
+        </div>
+        <div class="portfolio-item">
+          <video controls poster="poster2.png">
+            <source src="video2.mp4" type="video/mp4">
+          </video>
+          <p>캡컷 영상편집집</p>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-footer">&copy; 2025 Canvas Portfolio. All rights reserved.</div>
+  </section>
+
+  <!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Canvas Portfolio</title>
+  <style>
+    /* Google Font 불러오기 */
+    @import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Noto+Sans+KR:wght@100..900&display=swap');
+
+    /* 기본 레이아웃 */
+    body {
+      margin: 0;
+      font-family: 'Noto Sans KR','Bree Serif';
+    }
+
+    /* 헤더와 네비게이션 공통 스타일 */
+    header, nav {
+      background: #3399ff;
+      border: none;
+    }
+    header {
+      /* 고정 위치, 중앙 정렬 */
+      padding: 5px 20px;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    header h1 {
+      /* 로고 텍스트 스타일 */
+      color: #3399FF;
+      margin: 0;
+      font-size: 24px;
+      font-family: 'Bree Serif','Noto Sans KR';
+    }
+
+    nav {
+      /* 네비 높이만큼 아래로 내려놓기 */
+      padding: 0 20px;
+      position: fixed;
+      top: 36px; left: 0;
+      width: 100%;
+      z-index: 998;
+      display: flex;
+      gap: 15px;
+    }
+    nav a {
+      /* 메뉴 링크 기본 스타일 */
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      line-height: 40px;
+      cursor: pointer;
+      font-family: 'Bree Serif','Noto Sans KR';
+    }
+    nav a.active-link {
+      /* 클릭된 메뉴 강조 */
+      border-bottom: 2px solid #FFEA00;
+      color: #FFEA00;
+    }
+
+    /* 섹션 기본 숨김 */
+    section {
+      display: none;
+      padding-top: 76px; /* 헤더+네비 높이만큼 패딩 */
+    }
+    /* Home 섹션일 때 flex 레이아웃으로 보이기 */
+    #home.active {
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 76px);
+      margin: 0;
+    }
+    /* Profile 섹션일 때 flex 레이아웃 */
+    #profile.active {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      padding: 100px 40px 40px;
+    }
+    /* Portfolio 섹션일 때 block 레이아웃 */
+    #portfolio.active {
+      display: block;
+    }
+
+    /* ===== Home ===== */
+    .home-top {
+      /* 상단 영역: 파란 배경, 가운데 정렬 */
+      flex: 1;
+      display: flex;
+      background: #3399ff;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+    .home-top img {
+      /* 이미지 크기 및 스타일 */
+      width: 500px;
+      height: 300px;
+      object-fit: cover;
+      margin-right: 30px;
+      border-radius: 12px;
+    }
+    .home-top-text {
+      /* 의미 텍스트 스타일 */
+      font-size: 60px;
+      font-weight: bold;
+      color: rgb(235, 229, 40);
+      font-family: 'Bree Serif','Noto Sans KR';
+    }
+    .home-bottom {
+      /* 하단 영역: 흰 배경, 가운데 정렬 */
+      flex: 1;
+      background: #fdfdf1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .home-bottom h2 {
+      /* 타이핑 효과 대상 텍스트 스타일 */
+      font-size: 100px;
+      color: #3399ff;
+      margin: 0;
+    }
+
+    /* ===== Profile ===== */
+    .profile-image {
+      /* 원형 프로필 이미지 컨테이너 */
+      flex: 0 0 200px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 40px;
+    }
+    .profile-image img {
+      /* 이미지 꽉 채우기 */
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .profile-text {
+      /* 텍스트 영역 스타일 */
+      flex: 1;
+      max-width: 800px;
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    /* ===== Portfolio ===== */
+    .portfolio-items {
+      padding: 20px;
+    }
+    .portfolio-row {
+      /* 작품 행 스타일 */
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .portfolio-item {
+      width: 300px;
+    }
+    .portfolio-item img,
+    .portfolio-item video {
+      /* 작품 이미지/비디오 스타일 */
+      width: 100%;
+      border-radius: 8px;
+    }
+    .portfolio-item p {
+      /* 작품 캡션 */
+      text-align: center;
+      margin: 10px 0;
+    }
+    .portfolio-footer {
+      /* 푸터 텍스트 */
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <!-- 헤더 로고 -->
+  <header>
+    <h1>1</h1>
+  </header>
+
+  <!-- 네비게이션 -->
+  <nav>
+    <a onclick="showSection('home')">Home</a>
+    <a onclick="showSection('profile')">Profile</a>
+    <a onclick="showSection('portfolio')">Portfolio</a>
+  </nav>
+
+  <!-- Home 섹션 -->
+  <section id="home" class="active">
+    <div class="home-top">
+      <img src="image0.jpg" alt="홈 이미지">
+      <div class="home-top-text">Meaning &amp; Fun</div>
+    </div>
+    <div class="home-bottom">
+      <!-- DORIMGO 타자기 효과 대상 -->
+      <h2 class="typewriter"></h2>
+    </div>
+  </section>
+
+  <!-- Profile 섹션 -->
+  <section id="profile">
+    <div class="profile-image">
+      <img src="image2.png" alt="프로필 이미지">
+    </div>
+    <div class="profile-text">
+      <h1>고도림</h1>
+      <h2>살아오며 인상 깊었던 문장 or 이번 생에 풀고 싶은 질문</h2>
+      “인생이 나에게 레몬을 주거든, 그것으로 레몬 에이드를 만들어라.”<br><br>
+      <h2>내가 사랑하는 것들</h2>
+      우리 가족, 웹툰 <em>유미의 세포들</em>, 표고버섯, 맛조개 잡기, 튀르키예, 오키나와<br><br>
+      <h2>10년 후에 나는</h2>
+      29살 나는 어떤 모습일까? 여전히 내가 사랑하는 것을 소중히 여기고, 조금 더 자유롭고 단단해진 내가 되어 있기를.<br><br>
+      <h2>지금까지 나는</h2><br>
+      <strong>봉사 활동</strong><br>
+      [2022.07] ~ [2022.08] 지역 아동센터 여름방학 코딩 캠프 운영<br>
+      [2023.04] ~ [2023.06] 초등학생 대상 미술 심리 활동 보조<br><br>
+      <strong>수상 경력</strong><br>
+      [2023.11] 지역 창의소프트웨어 공모전 우수상<br>
+      [2022.10] 학습 멘토링 우수활동자 표창<br><br>
+      <strong>관심 분야 활동</strong><br>
+      [2021.03] ~ [2022.12] 중·고등학생 대상 파이썬 기초강의 진행<br>
+      [2023.01] ~ [2023.05] 환경 교육 프로젝트 ‘지구지킴이’ 참여
+    </div>
+  </section>
+
+  <!-- Portfolio 섹션 -->
+  <section id="portfolio">
+    <div class="portfolio-items">
+      <div class="portfolio-row">
+        <div class="portfolio-item">
+          <img src="image3.png" alt="작품1">
+          <p>피카소 스타일 고양이</p>
+        </div>
+        <div class="portfolio-item">
+          <img src="image4.png" alt="작품2">
+          <p>샤갈 스타일의 하얀 날아다니는 고양이</p>
+        </div>
+        <div class="portfolio-item">
+          <img src="image5.png" alt="작품3">
+          <p>레오나르도 다 빈치 스타일의 날아다니는 고양이</p>
+        </div>
+        <div class="portfolio-item">
+          <img src="image6.png" alt="작품4">
+          <p>모네 스타일 고양이</p>
+        </div>
+      </div>
+      <div class="portfolio-row">
+        <div class="portfolio-item">
+          <video controls poster="poster1.png">
+            <source src="video1.mp4" type="video/mp4">
+          </video>
+          <p>수노 음악생성</p>
+        </div>
+        <div class="portfolio-item">
+          <video controls poster="poster2.png">
+            <source src="video2.mp4" type="video/mp4">
+          </video>
+          <p>캡컷 영상편집집</p>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-footer">&copy; 2025 Canvas Portfolio. All rights reserved.</div>
+  </section>
+
+  <script>
+    // 네비게이션 메뉴 링크들 선택
+    const navLinks = document.querySelectorAll('nav a');
+
+    // 클릭된 섹션에 맞춰 링크 강조 처리
+    function setActiveLink(id) {
+      navLinks.forEach(a => {
+        if (a.getAttribute('onclick').includes(id)) {
+          a.classList.add('active-link');
+        } else {
+          a.classList.remove('active-link');
+        }
+      });
+    }
+
+    // 섹션 보여주기/숨기기 함수
+    function showSection(id) {
+      document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      setActiveLink(id);
+    }
+
+    // 타자기 효과용 텍스트와 대상 요소
+    const typeText = "DORIMGO";
+    const typeTarget = document.querySelector('.typewriter');
+    let ti = 0;
+
+    // 한 글자씩 출력하는 재귀 함수
+    function typeWriter() {
+      if (ti < typeText.length) {
+        typeTarget.textContent += typeText.charAt(ti++);
+        setTimeout(typeWriter, 150);
+      }
+    }
+
+    // 페이지 로드 시 Home 활성화 및 타자기 효과 시작
+    window.addEventListener('DOMContentLoaded', () => {
+      showSection('home');
+      typeWriter();
+    });
+  </script>
+</body>
+</html>
